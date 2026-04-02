@@ -25,7 +25,8 @@ RUN cd server && npm ci --omit=dev
 
 COPY --from=server-build /app/server/dist ./server/dist
 COPY --from=client-build /app/client/dist ./client/dist
-COPY server/drizzle ./server/drizzle
+COPY server/drizzle.config.ts ./server/
+COPY server/src/db/schema.ts ./server/src/db/
 
 EXPOSE 3001
 ENV NODE_ENV=production
