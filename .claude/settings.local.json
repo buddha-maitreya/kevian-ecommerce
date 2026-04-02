@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.keviankenya.com)",
+      "Bash(pdftotext \"C:\\\\Users\\\\Admin\\\\Downloads\\\\Kevian LTD - Project Proposal.pdf\" -)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)"
+    ]
+  }
+}
