@@ -16,7 +16,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = parseInt(process.env.PORT || "3001");
 
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+// CORS only needed in dev (Vite runs on a different port). In production, client is served from same origin.
+app.use(cors({ origin: process.env.NODE_ENV === "production" ? false : "http://localhost:5173" }));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -33,7 +34,7 @@ app.get("/api/health", (_req, res) => {
 // Serve client build in production
 const clientDist = path.join(__dirname, "../../client/dist");
 app.use(express.static(clientDist));
-app.get("*", (_req, res) => {
+app.get("/{*splat}", (_req, res) => {
   res.sendFile(path.join(clientDist, "index.html"));
 });
 
